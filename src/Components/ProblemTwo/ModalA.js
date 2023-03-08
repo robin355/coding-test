@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 const ModalA = () => {
-    const [Country, setCountry] = useState([])
+    const [Countries, setCountry] = useState([])
     useEffect(() => {
         fetch('https://contact.mediusware.com/api/contacts/?format=json')
             .then(res => res.json())
@@ -11,8 +11,10 @@ const ModalA = () => {
     return (
         <div>
             {
-                Country.map(country => <li key={country.id}>{country.country.name}</li>)
+                Countries.map(country => <li key={country.id}>{country.country.name}</li>)
+
             }
+
         </div>
     );
 };

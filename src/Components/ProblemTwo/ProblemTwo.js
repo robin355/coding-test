@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ModalA from './ModalA';
 import ModalB from './ModalB';
 import './ProblemTwo.css'
@@ -6,7 +6,6 @@ function ProblemTwo() {
     const [showAllContactsModal, setShowAllContactsModal] = useState(false);
     const [showUSContactModal, setShowUSContactModal] = useState(false);
     const [onlyEven, setOnlyEven] = useState(false);
-    const [Country, setCountry] = useState([])
 
     const handleAllContactsClick = () => {
         setShowAllContactsModal(true);
@@ -24,14 +23,6 @@ function ProblemTwo() {
     const handleCheckboxChange = (event) => {
         setOnlyEven(event.target.checked);
     };
-    useEffect(() => {
-        fetch('https://contact.mediusware.com/api/contacts/?format=json')
-            .then(res => res.json())
-            .then(data => setCountry(data.results))
-    }, [])
-
-
-    const filteredContacts = onlyEven ? Country.filter(contact => contact.id % 2 === 0) : Country;
 
     return (
         <div className='p-[200px]'>
@@ -40,12 +31,6 @@ function ProblemTwo() {
 
             {showAllContactsModal && (
                 <ModalA onClose={() => setShowAllContactsModal(false)}>
-                    {filteredContacts.map(contact => (
-                        <div key={contact.id}>
-                            <p>{contact.name}</p>
-                            <p>{contact.email}</p>
-                        </div>
-                    ))}
                     <button onClick={handleUSContactClick}>US Contact</button>
                     <button onClick={handleCloseClick}>Close</button>
                 </ModalA>
@@ -53,12 +38,7 @@ function ProblemTwo() {
 
             {showUSContactModal && (
                 <ModalB onClose={() => setShowUSContactModal(false)}>
-                    {filteredContacts.map(contact => (
-                        <div key={contact.id}>
-                            <p>{contact.name}</p>
-                            <p>{contact.email}</p>
-                        </div>
-                    ))}
+
                     <button onClick={handleAllContactsClick}>All Contacts</button>
                     <button onClick={handleCloseClick}>Close</button>
                 </ModalB>
