@@ -9,7 +9,7 @@ const Home = () => {
                     Problem One
                 </Link>
             </button>
-            <button className='btn btn-outline btn-primary'>
+            <button className='btn btn-outline btn-primary mr-5'>
                 <Link to='/problem-two'>
                     Problem Two
                 </Link>
